@@ -6,17 +6,19 @@
 # Tools & APIS  – Python (Coding)
 #                 Cloud Natural Language API 
 #                 Dialogflow API
+#					TODO: GPT2 NLP response
+#				  Twitter API
 
-# Members       – Tristan Bradfield
-#                 Aidan Gray
-#                 Kameron Melvin
+# Members       Aidan Gray
+#				Joshua Decano
+#				Scott Herron
+#				Richard Huang
 #################
 
 #modules : sentiment analysis on users tweets
 #					 gifs and sprites
 #					 chat responses based on sentiment
 #					 general comments based on sentiment over past N tweets
-#					 make it work in AR, have it run around doin gay little memes
 
 # from google.cloud import dialogflow
 # from google.cloud import language

@@ -1,0 +1,54 @@
+[
+    {
+        "username": "aidan.gray",
+        "growth_stage": 0,
+        "last_interaction_date": "05042022",
+        "creation_date": "05042022",
+        "fav_food": "cheese",
+        "hated_food": "sand",
+        "rolling_avg_sentiment": 0.5,
+        "hunger": 0.0,
+        "playfulness": 0.5,
+        "interactions_counter": 1,
+        "sprite_hash": 255
+    },
+    {
+        "username": "scott.herron",
+        "growth_stage": 0,
+        "last_interaction_date": "05042022",
+        "creation_date": "05042022",
+        "fav_food": "steak",
+        "hated_food": "peaches",
+        "rolling_avg_sentiment": 0.5,
+        "hunger": 0.0,
+        "playfulness": 0.5,
+        "interactions_counter": 1,
+        "sprite_hash": 255
+    },    
+    {
+        "username": "richard.huang",
+        "growth_stage": 0,
+        "last_interaction_date": "05042022",
+        "creation_date": "05042022",
+        "fav_food": "corn",
+        "hated_food": "cupcake",
+        "rolling_avg_sentiment": 0.5,
+        "hunger": 0.0,
+        "playfulness": 0.5,
+        "interactions_counter": 1,
+        "sprite_hash": 255
+    },
+    {
+        "username": "joshua.decano",
+        "growth_stage": 0,
+        "last_interaction_date": "05042022",
+        "creation_date": "05042022",
+        "fav_food": "fizzbuzz",
+        "hated_food": "activated charcoal",
+        "rolling_avg_sentiment": 0.5,
+        "hunger": 0.0,
+        "playfulness": 0.5,
+        "interactions_counter": 1,
+        "sprite_hash": 255
+    }
+]
