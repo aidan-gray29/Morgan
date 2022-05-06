@@ -34,3 +34,4 @@ def find_emotion_gif(sentiment_score):
   sections = len(images)
   image_file = images[int( (((sentiment_score + 1)*100)/2) / (100/sections) )]
   return image_file
+##

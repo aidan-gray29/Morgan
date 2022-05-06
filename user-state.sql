@@ -23,3 +23,4 @@ CREATE TABLE user_states(
 
 INSERT INTO user_states( username, evolution, fav_food, hated_food, persistent_sentiment, hunger, playfulness)
     VALUES ('rawbarobx', 1, 'steak', 'rock', 0.99, 0.85, 0.2);
+#

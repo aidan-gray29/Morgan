@@ -101,3 +101,4 @@ class User:
     self.__execute_query(connection, query_update)
 
     self.__extractProfile(connection, self.username)
+#
