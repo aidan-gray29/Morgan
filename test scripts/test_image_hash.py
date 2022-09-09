@@ -3,7 +3,7 @@
 import sys
 sys.path.append("..")
 
-from image-hash import *
+from image_hash import *
 
 # This is all driver test code for the hash function
 # None of this will be needed in the final project
