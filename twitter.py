@@ -1,61 +1,66 @@
+import tweepy, configparser, sys
+from time import sleep
+from os import listdir
+from os.path import isfile, join
 
-import tweepy
-import configparser
+# imports the Reaction GIFs folder to be used in the directory
+def file_get():
+    mypath = "./ReactionGIFs" 
+    onlyfiles= []
+    for file in listdir(mypath):
+        if isfile(join(mypath,file)):
+            onlyfiles.append(file)
+    return onlyfiles
 
-config = configparser.ConfigParser(interpolation=None)
-file = 'confidential.ini'
+# Twitter API v2 authentication using OAuth 1.0a User Context 
+def tweepy_cred():
+    auth = tweepy.OAuthHandler(config['Twitter']['consumer_key'], config['Twitter']['consumer_secret'] )
+    auth.set_access_token(config['Twitter']['access_token'], config['Twitter']['access_token_secret'])
+    return tweepy.API(auth)
 
-# Initialize blank default values
-# ONLY add them in the unshared .ini file
-default = {'bearer_token': '',
-           'consumer_key': '',
-           'consumer_secret': '',
-           'access_token': '',
-           'access_token_secret': ''}
+# Posts a GIF based on the emotion provided
+def tweet_reaction(api, emotion):
+    if emotion == "angry":
+        filename = "./ReactionGIFs/dino_angry.gif"
+        status = "Testing Angry GIF Post"
+    elif emotion == "happy":
+        filename = "./ReactionGIFs/dino_happy.gif"
+        status = "Testing Happy GIF Post"
+    elif emotion == "bored":
+        filename = "./ReactionGIFs/dino_bored.gif"
+        status = "Testing Bored GIF Post"
+    elif emotion == "sad":
+        filename = "./ReactionGIFs/dino_sad.gif"
+        status = "Testing Sad GIF Post"
+    elif emotion == "confused":
+        filename = "./ReactionGIFs/dino_confused.gif"
+        status = "Testing Confused GIF Post"
+    try:
+        api.update_status_with_media(filename=filename,status=status)
+        print("Tweeted!")
+        sleep(900)
+    except Exception as e:
+        print("Encountered error! Error details: %s"%str(e))
 
-# Read the Twitter tokens from the file
-# If they don't exist, create a new section so they can be manually added
-config.read(file)
-if 'Twitter' not in config:
-    config['Twitter'] = default
-    with open(file, 'w') as configfile:
-        config.write(configfile)
-    
-    raise ValueError("Twitter tokens not found in %s file. Please add them before running Morgan." % file)
+if __name__ == "__main__":
+    config = configparser.ConfigParser(interpolation=None)
+    file = 'confidential.ini'
 
-client = tweepy.Client(
-    # Twitter developer bearer tokens and consumer key/secret 
-    bearer_token=config['Twitter']['bearer_token'],
-    consumer_key=config['Twitter']['consumer_key'],
-    consumer_secret=config['Twitter']['consumer_secret'],
-    # Access token and secret from the database
-    access_token=config['Twitter']['access_token'],
-    access_token_secret=config['Twitter']['access_token_secret']
-)
+    # Initialize blank default values
+    # ONLY add them in the unshared .ini file
+    default = {'bearer_token': '',
+            'consumer_key': '',
+            'consumer_secret': '',
+            'access_token': '',
+            'access_token_secret': ''}
 
-# checking most recent tweet from the bot's account
-query = 'from:MorganbotDev'
-tweets = client.search_recent_tweets(query=query, tweet_fields=['context_annotations', 'created_at'], max_results=100)
+    # Read the Twitter tokens from the file
+    # If they don't exist, create a new section so they can be manually added
+    config.read(file)
+    if 'Twitter' not in config:
+        config['Twitter'] = default
+        with open(file, 'w') as configfile:
+            config.write(configfile)
+        raise ValueError("Twitter tokens not found in %s file. Please add them before running Morgan." % file)
 
-for tweet in tweets.data:
-    print(tweet.text)
-    if len(tweet.context_annotations) > 0:
-        print(tweet.context_annotations)
-
-# Tweet Fields
-response = client.search_recent_tweets(
-    "Tweepy", tweet_fields=["created_at", "lang"]
-)
-tweets = response.data
-
-# You can then access those fields as attributes of the Tweet objects
-for tweet in tweets:
-    print(tweet.id, tweet.lang)
-
-# Alternatively, you can also access fields as keys, like a dictionary
-for tweet in tweets:
-    print(tweet["id"], tweet["lang"])
-
-# There’s also a data attribute/key that provides the entire data dictionary
-for tweet in tweets:
-    print(tweet.data)
+    tweet_reaction(tweepy_cred())
