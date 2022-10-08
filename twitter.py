@@ -45,6 +45,7 @@ def tweet_reaction(api, emotion):
 if __name__ == "__main__":
     config = configparser.ConfigParser(interpolation=None)
     file = 'confidential.ini'
+    section = 'Twitter'
 
     # Initialize blank default values
     # ONLY add them in the unshared .ini file
@@ -57,10 +58,10 @@ if __name__ == "__main__":
     # Read the Twitter tokens from the file
     # If they don't exist, create a new section so they can be manually added
     config.read(file)
-    if 'Twitter' not in config:
-        config['Twitter'] = default
+    if section not in config:
+        config[section] = default
         with open(file, 'w') as configfile:
             config.write(configfile)
-        raise ValueError("Twitter tokens not found in %s file. Please add them before running Morgan." % file)
+        raise ValueError(f"{section} tokens not found in {file} file. Please add them before running Morgan.")
 
     tweet_reaction(tweepy_cred())
