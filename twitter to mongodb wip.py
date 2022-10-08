@@ -18,10 +18,10 @@ from pymongo import MongoClient, ASCENDING, TEXT
 ##    return client['test_stream']
 
 def main():
-    consumer_key = 'LlAiBXoab2EX0uzUxUZnboNgI'
-    consumer_secret = 'jOXNfwUs0rsgdstf0kWVXnYYVRCT9w69LUYncp0pf0RWxdvZDw'
-    access_token = '1565937995517009921-X21d0CQiwyenBVsY27w7MvijV3KRyv'
-    access_secret = 'ULG8gBYoxS9BKPxjIXPXlyAwSUw5lS5sI9yVfLbexTtUq'
+    consumer_key = ''
+    consumer_secret = ''
+    access_token = ''
+    access_secret = ''
 
     connection_string = "mongodb+srv://dev-morgan-admin:oxsuiNupoeJEqED1@cluster0.gurz1.mongodb.net/test"
 
