@@ -20,7 +20,7 @@ def getResponse(chatInput):
     """ Output full response data for logging
     new = configparser.ConfigParser(interpolation=None)
     new['response'] = response
-    with open('ai-response.txt', 'w') as cf:
+    with open('./ai-response.txt', 'w') as cf:
         new.write(cf)
     """
     return result
