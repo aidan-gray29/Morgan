@@ -1,42 +1,15 @@
 #! /usr/bin/python3
 
 import sys
-import openai
-import configparser
+import aisentiment
+import openai_hook
 
-config = configparser.ConfigParser(interpolation=None)
-file = 'confidential.ini'
-section = 'OpenAI'
-default = { 'api_key': '' }
-
-def getResponse(chatInput):
-    response = openai.Completion.create(
-        model="text-ada-001",
-        prompt=chatInput,
-        max_tokens=30,
-        temperature=0.6,
-    )
-    result=response.choices[0].text
-    """ Output full response data for logging
-    new = configparser.ConfigParser(interpolation=None)
-    new['response'] = response
-    with open('./ai-response.txt', 'w') as cf:
-        new.write(cf)
-    """
-    return result
+def getChatResponse(chatInput):
+    aisentiment.getChatSentiment(chatInput)
+    return openai_hook.getAIResponse(chatInput + "\n(Respond " + aisentiment.getSentimentString() + ")")
 
 if __name__ == '__main__':
-    config.read(file)
+    openai_hook.init()
 
-    # If the section doesn't exist, append the default values to the file and exit
-    if section not in config:
-        config[section] = default
-        with open(file, 'w') as configfile:
-            config.write(configfile)
-
-        raise ValueError(f"{section} tokens not found in {file} file. Please add them before running Morgan.")
-
-    openai.api_key = config[section]['api_key']
-
-    print(getResponse(sys.argv[1]))
+    print(getChatResponse(sys.argv[1]))
 
