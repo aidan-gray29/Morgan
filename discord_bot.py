@@ -34,8 +34,11 @@ TOKEN = "BOT TOKEN GOES HERE"
 
 from user import User
 from dialogflow import discord_response
+import aidialog
     
 if __name__ == '__main__':
+	aidialog.authOpenAi()
+
 	@client.event
 	async def on_ready():
 		print('We have logged in as {0.user}'.format(client))
@@ -47,8 +50,7 @@ if __name__ == '__main__':
 			print(message.author.id)
 			user = str(message.author.id)
 			poten_new_user = User(user)
-			temp_tuple = discord_response(poten_new_user, message.content)
-			await message.channel.send(temp_tuple[1], file=discord.File(temp_tuple[0]))
+			await message.channel.send(aidialog.getResponse(message.content), file='dino_blinking.gif')
 			poten_new_user.close()
 	client.run(TOKEN)
 #
