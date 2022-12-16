@@ -1,10 +1,13 @@
 import discord
 import os
 import aidialog
+import configparser
 
 #run discord bot client
 client = discord.Client(intents=discord.Intents.default())
-TOKEN = "ODMzMzI2NTU0NDg1NjIwNzU2.Gam94o.1KreUyrGQI38Jg1l0ICnwqxI2NkJACACbAmJZM"
+config = configparser.ConfigParser(interpolation=None)
+config.read('confidential.ini')
+TOKEN = config['Discord']['token']
 
 if __name__ == '__main__':
     #authenticate to openai API
