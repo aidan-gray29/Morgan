@@ -25,9 +25,8 @@ def getResponse(chatInput):
     """
     return result
 
-if __name__ == '__main__':
+def authOpenAi():
     config.read(file)
-
     # If the section doesn't exist, append the default values to the file and exit
     if section not in config:
         config[section] = default
@@ -35,8 +34,9 @@ if __name__ == '__main__':
             config.write(configfile)
 
         raise ValueError(f"{section} tokens not found in {file} file. Please add them before running Morgan.")
-
     openai.api_key = config[section]['api_key']
 
+if __name__ == '__main__':
+    authOpenAi()
     print(getResponse(sys.argv[1]))
 
